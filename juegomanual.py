@@ -26,7 +26,7 @@ class Jugador:
             print(f"{self.nombre} ya usó su item.")
             return
 
-        print(f"🛠️ {self.nombre} usa {self.item}!")
+        print(f"{self.nombre} usa {self.item}!")
         self.item_usado = True
 
         if self.item == "Frasco de furia":
@@ -44,18 +44,18 @@ class Jugador:
 
     def recibir_daño(self, daño):
         if self.invulnerable:
-            print(f"🛡️ {self.nombre} evitó el daño con Capa de Invisibilidad!")
+            print(f"{self.nombre} evitó el daño con Capa de Invisibilidad!")
             self.invulnerable = False
             return
         if self.defensa:
             daño *= 0.3
             self.defensa = False
         self.vida -= daño
-        print(f"💥 {self.nombre} recibe {daño:.1f} de daño. Vida actual: {self.vida:.1f}")
+        print(f"{self.nombre} recibe {daño:.1f} de daño. Vida actual: {self.vida:.1f}")
 
     def atacar(self, objetivo):
         daño = self.daño * 2 if self.furia_activa else self.daño
-        print(f"⚔️ {self.nombre} ataca a {objetivo.nombre} con {self.arma}")
+        print(f"{self.nombre} ataca a {objetivo.nombre} con {self.arma}")
         objetivo.recibir_daño(daño)
         self.furia_activa = False
 
@@ -112,10 +112,10 @@ class Juego:
             print("========================")
 
             if turno_jugador1:
-                print("\n🎯 Turno del Jugador 1")
+                print("\n Turno del Jugador 1")
                 equipo_atacante, equipo_oponente = equipo1, equipo2
             else:
-                print("\n🎯 Turno del Jugador 2")
+                print("\n Turno del Jugador 2")
                 equipo_atacante, equipo_oponente = equipo2, equipo1
 
             atacante = self.elegir_objetivo(equipo_atacante)
@@ -127,7 +127,7 @@ class Juego:
             atacante.atacar(objetivo)
 
             if atacante.extra_turno and objetivo.vida > 0:
-                print(f"🔥 {atacante.nombre} tiene turno extra gracias a Energizante!")
+                print(f"{atacante.nombre} tiene turno extra gracias a Energizante!")
                 objetivo = self.elegir_objetivo(equipo_oponente)
                 atacante.atacar(objetivo)
                 atacante.extra_turno = False
@@ -135,16 +135,16 @@ class Juego:
             # Daño por quemadura
             for p in todos:
                 if p.quemado > 0 and p.vida > 0:
-                    print(f"🔥 {p.nombre} sufre quemadura")
+                    print(f"{p.nombre} sufre quemadura")
                     p.recibir_daño(2)
                     p.quemado -= 1
 
             turno_jugador1 = not turno_jugador1
 
         if any(p.vida > 0 for p in equipo1):
-            print("\n🏆 ¡Jugador 1 gana la batalla!")
+            print("\n¡Jugador 1 gana la batalla!")
         else:
-            print("\n🏆 ¡Jugador 2 gana la batalla!")
+            print("\n¡Jugador 2 gana la batalla!")
 
 
 personajes = [
